@@ -1,82 +1,143 @@
 "use client";
-import { useState } from "react";
+
+import { motion } from "framer-motion";
+
+const products = [
+  {
+    id: 1,
+    name: "Explosion Box",
+    price: 599,
+    img: "https://images.unsplash.com/photo-1519681393784-d120267933ba",
+  },
+  {
+    id: 2,
+    name: "Customized Mug",
+    price: 299,
+    img: "https://images.unsplash.com/photo-1589987607627-1f5c8d3d1d4b",
+  },
+  {
+    id: 3,
+    name: "Gift Hamper",
+    price: 399,
+    img: "https://images.unsplash.com/photo-1607083206968-13611e3d76db",
+  },
+];
 
 export default function Home() {
-  const phone = "7050864561";
-
-  const products = [
-    {
-      id: 1,
-      name: "Explosion Box",
-      price: 599,
-      img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800"
-    },
-    {
-      id: 2,
-      name: "Customized Mug",
-      price: 299,
-      img: "https://images.unsplash.com/photo-1585386959984-a4155223161a?q=80&w=800"
-    },
-    {
-      id: 3,
-      name: "Gift Hamper",
-      price: 399,
-      img: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?q=80&w=800"
-    }
-  ];
-
-  const [selected, setSelected] = useState(null);
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    street: "",
-    area: "",
-    city: "",
-    pincode: ""
-  });
-
-  const order = () => {
-    const msg =
-      `Hi ZetsyBuy! I want to order: ${selected.name} (₹${selected.price})%0A` +
-      `Name: ${form.name}%0APhone: ${form.phone}%0AStreet: ${form.street}%0AArea: ${form.area}%0ACity: ${form.city}%0APincode: ${form.pincode}`;
-
-    window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
-  };
-
   return (
-    <div style={{ fontFamily: "sans-serif", background: "#f8f9fa", minHeight: "100vh", padding: 20 }}>
-      <h1 style={{ textAlign: "center", fontSize: 36 }}>ZetsyBuy</h1>
-      <p style={{ textAlign: "center", marginBottom: 40 }}>Handmade Gifts 🎁</p>
+    <div style={styles.container}>
+      {/* Hero Section */}
+      <div style={styles.hero}>
+        <h1 style={styles.logo}>ZetsyBuy</h1>
+        <p style={styles.tagline}>Premium Handmade Creations 🎁</p>
+        <button style={styles.heroBtn}>Explore Collection</button>
+      </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))", gap: 20 }}>
-        {products.map((p) => (
-          <div key={p.id} style={{ background: "#fff", borderRadius: 10, padding: 15, boxShadow: "0 5px 15px rgba(0,0,0,0.1)" }}>
-            <img src={p.img} style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 8 }} />
-            <h3>{p.name}</h3>
-            <p style={{ fontWeight: "bold" }}>₹{p.price}</p>
-            <button onClick={() => setSelected(p)} style={{ padding: 10, background: "#25D366", color: "#fff", border: "none", borderRadius: 6 }}>
-              Order on WhatsApp
-            </button>
-          </div>
+      {/* Products */}
+      <div style={styles.grid}>
+        {products.map((item) => (
+          <motion.div
+            key={item.id}
+            whileHover={{ scale: 1.05 }}
+            style={styles.card}
+          >
+            <img src={item.img} alt={item.name} style={styles.image} />
+            <h3 style={styles.productName}>{item.name}</h3>
+            <p style={styles.price}>₹{item.price}</p>
+            <button style={styles.button}>Order on WhatsApp</button>
+          </motion.div>
         ))}
       </div>
 
-      {selected && (
-        <div style={{ marginTop: 40, background: "#fff", padding: 20, borderRadius: 10 }}>
-          <h2>Enter Delivery Details</h2>
-          {["name","phone","street","area","city","pincode"].map((field)=>(
-            <input
-              key={field}
-              placeholder={field}
-              style={{ display:"block", margin:"10px 0", padding:8, width:"100%" }}
-              onChange={(e)=>setForm({...form,[field]:e.target.value})}
-            />
-          ))}
-          <button onClick={order} style={{ padding:10, background:"#000", color:"#fff", border:"none", borderRadius:6 }}>
-            Confirm Order
-          </button>
-        </div>
-      )}
+      {/* About Section */}
+      <div style={styles.about}>
+        <h2>Why Choose ZetsyBuy?</h2>
+        <p>✔ Handmade with love</p>
+        <p>✔ Premium Quality Materials</p>
+        <p>✔ Fast Shipping Across India</p>
+        <p>✔ Direct WhatsApp Support</p>
+      </div>
+
+      {/* Footer */}
+      <div style={styles.footer}>
+        <p>© 2026 ZetsyBuy | All Rights Reserved</p>
+      </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    background: "#0f172a",
+    color: "#fff",
+    minHeight: "100vh",
+    paddingBottom: "50px",
+    fontFamily: "sans-serif",
+  },
+  hero: {
+    textAlign: "center",
+    padding: "60px 20px",
+    background: "linear-gradient(135deg, #0f172a, #1e293b)",
+  },
+  logo: {
+    fontSize: "48px",
+    fontWeight: "bold",
+  },
+  tagline: {
+    color: "#cbd5e1",
+    margin: "10px 0",
+  },
+  heroBtn: {
+    background: "#f59e0b",
+    border: "none",
+    padding: "12px 25px",
+    borderRadius: "30px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    marginTop: "15px",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: "25px",
+    padding: "40px 20px",
+  },
+  card: {
+    background: "#1e293b",
+    padding: "20px",
+    borderRadius: "20px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+    textAlign: "center",
+  },
+  image: {
+    width: "100%",
+    borderRadius: "15px",
+  },
+  productName: {
+    marginTop: "15px",
+  },
+  price: {
+    color: "#f59e0b",
+    fontWeight: "bold",
+    margin: "10px 0",
+  },
+  button: {
+    background: "#f59e0b",
+    border: "none",
+    padding: "10px 20px",
+    borderRadius: "25px",
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
+  about: {
+    textAlign: "center",
+    padding: "50px 20px",
+    background: "#111827",
+  },
+  footer: {
+    textAlign: "center",
+    padding: "20px",
+    background: "#0f172a",
+    borderTop: "1px solid #1e293b",
+  },
+};
