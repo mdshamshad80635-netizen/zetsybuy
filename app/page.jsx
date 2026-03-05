@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 // ─── DATA ─────────────────────────────────────────────────────────────
-const WHATSAPP_NUMBER = "919999999999";
+const WHATSAPP_NUMBER = "7050864561";
 
 const PRODUCTS = [
   { id: 1, title: "Luxury Rose & Love Memory Box", description: "A timeless keepsake filled with handpicked preserved roses, personalized notes, premium chocolates, and a glowing LED heart frame.", price: "₹2,499", originalPrice: "₹3,999", category: "Romantic Gifts", emoji: "🌹", rating: 4.9, badge: "BESTSELLER", affiliateLink: "https://www.amazon.in/s?k=preserved+rose+memory+box&tag=zetsy-21", features: ["12 Preserved Roses", "LED Heart Frame", "Personalized Message Card", "Premium Velvet Box"], featured: true, inStock: true },
